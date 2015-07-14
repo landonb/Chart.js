@@ -1,0 +1,7 @@
+# Last modified: 2015.07.14
+
+Chart.js
+Chart.min.js
+custom/*
+node_modules/*
+
