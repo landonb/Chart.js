@@ -1822,11 +1822,13 @@
 		initialize: function(){
 			this.size = min([this.height, this.width]);
 			this.drawingArea = (this.display) ? (this.size/2) - (this.fontSize/2 + this.backdropPaddingY) : (this.size/2);
+			if (this.drawingArea < 0) {
+				this.drawingArea = 0;
+			}
 		},
 		calculateCenterOffset: function(value){
 			// Take into account half font size + the yPadding of the top value
 			var scalingFactor = this.drawingArea / (this.max - this.min);
-
 			return (value - this.min) * scalingFactor;
 		},
 		update : function(){
@@ -1834,6 +1836,9 @@
 				this.setScaleSize();
 			} else {
 				this.drawingArea = (this.display) ? (this.size/2) - (this.fontSize/2 + this.backdropPaddingY) : (this.size/2);
+				if (this.drawingArea < 0) {
+					this.drawingArea = 0;
+				}
 			}
 			this.buildYLabels();
 		},
@@ -1949,6 +1954,9 @@
 			radiusReductionLeft = (isNumber(radiusReductionLeft)) ? radiusReductionLeft : 0;
 
 			this.drawingArea = largestPossibleRadius - (radiusReductionLeft + radiusReductionRight)/2;
+			if (this.drawingArea < 0) {
+				this.drawingArea = 0;
+			}
 
 			//this.drawingArea = min([maxWidthRadius, (this.height - (2 * (this.pointLabelFontSize + 5)))/2])
 			this.setCenterPoint(radiusReductionLeft, radiusReductionRight);
