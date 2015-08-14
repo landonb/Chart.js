@@ -33,7 +33,14 @@
 			}
 			else
 			{
-				return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
+				// 2015.08.13: [lb] having problems in Firefox because getPropertyValue
+				// is returning a string, e.g., "12px". I don't recall this happening
+				// when I first started using Chart.js, but it's been happending as of
+				// late. Note: After setting context.canvas.width/height with the string
+				// (and not a number), later calling context.drawImage() triggers an
+				// InvalidStateError from Firefox. So here we parse out the dirty bits.
+				//return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
+				return parseInt(document.defaultView.getComputedStyle(element).getPropertyValue(dimension), 10);
 			}
 		};
 
